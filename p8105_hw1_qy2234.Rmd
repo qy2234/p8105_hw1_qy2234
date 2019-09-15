@@ -5,3 +5,122 @@ date: "9/13/2019"
 output: github_document
 ---
 
+## Problem 1
+* Section 1
+
+```{r Question_one_part_one}
+## load the tidyverse package
+library(tidyverse)
+
+## create data frame
+df_one = tibble(
+  ramdom_sample = rnorm(8),
+  logical_vector = ramdom_sample > 0,
+  character_vector = c(
+  "CORONARY ARTERY DISEASE (CAD)",
+  "STROKE",
+  "LOWER RESPIRATORY INFECTIONS (LRI)",
+  "CHRONIC OBSTRUCTIVE PULMONARY DISEASE (COPD)",
+  "DIARRHEAL DISEASES",
+  "HIV/AIDS",
+  "RESPIRATORY CANCERS",
+  "TUBERCULOSIS"
+  ),
+  factor_vector = factor(c(
+  "severe",
+  "moderate",
+  "mild",
+  "mild",
+  "severe",
+  "moderate",
+  "moderate",
+  "moderate"
+  ))
+)
+
+## take the mean of each variable in the dataframe
+ramdom_sample_mean = mean(pull(df_one, ramdom_sample))
+logical_vector_mean = mean(pull(df_one, logical_vector))
+character_vector_mean = mean(pull(df_one, character_vector))
+factor_vector_mean = mean(pull(df_one, factor_vector))
+```
+### Observation: It worked only for ramdom_sample and logical_vector since both of them can be represented by numbers while character_vector and factor_vector can not be represented by numbers.
+
+
+
+* Section 2
+
+```{r Question_one_part_two, val = FALSE}
+## convert the logical vector to numeric, and multiply the random sample by the result
+as.numeric(pull(df_one, logical_vector))
+product_rs_lv_numeric = pull(df_one, logical_vector) * pull(df_one, ramdom_sample)
+product_rs_lv_numeric
+
+##convert the logical vector to a factor, and multiply the random sample by the result
+as.factor(pull(df_one, logical_vector))
+product_rs_lv_factor = pull(df_one, logical_vector) * pull(df_one, ramdom_sample)
+product_rs_lv_factor
+
+##convert the logical vector to a factor and then convert the result to numeric, and multiply the random sample by the result
+as.factor(pull(df_one, logical_vector))
+as.numeric(pull(df_one, logical_vector))
+product_rs_lv_n_f = pull(df_one, logical_vector) * pull(df_one, ramdom_sample)
+product_rs_lv_n_f
+```
+
+
+## Problem 2
+
+```{r Question_two}
+## load the tidyverse package
+library(tidyverse)
+
+## create data frame
+df_two = tibble(
+  x = rnorm(500),
+  y = rnorm(500),
+  logical_factor_two = x + y > 1
+)
+
+## change logical vector to numeric vector
+logical_factor_two_numeric = as.numeric(pull(df_two, logical_factor_two))
+logical_factor_two_numeric
+## change logical vector to factor vector
+logical_factor_two_factor = as.factor(pull(df_two, logical_factor_two))
+logical_factor_two_factor
+```
+### a short description of the vector
+*The size of the dataset is `r nrow(df_two)` by `r ncol(df_two)`
+* The mean of the sample is `r mean(pull(df_two, x))`
+* The median of the sample is `r median(pull(df_two, x))`
+* The standard deviation of the sample is `r sd(pull(df_two, x))`
+* the proportion of cases for which x + y > 1 is 
+`r sum(pull(df_two, logical_factor_two), na.rm = TRUE)/500`
+
+### scatterplot of y vs x
+```{r}
+library(tidyverse)
+## scatterplot using the logical variable, blue(green) means the sum of x and y exceeds 1
+ggplot(df_two, aes(color = logical_factor_two, x = x, y = y)) + 
+  geom_point()
+## scatterplot using the numeric variable, blue means the sum of x and y exceeds 1
+ggplot(df_two, aes(color = logical_factor_two_numeric, x = x, y = y)) + 
+  geom_point()
+## scatterplot using the factor variable, blue(green) means the sum of x and y exceeds 1
+ggplot(df_two, aes(color = logical_factor_two_factor, x = x, y = y)) + 
+  geom_point()
+
+## Export the first scatterplot to the project directory
+ggsave("df_two.png")
+```
+
+
+
+
+
+
+
+
+
+
+
