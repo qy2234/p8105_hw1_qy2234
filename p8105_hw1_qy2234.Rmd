@@ -53,18 +53,21 @@ factor_vector_mean = mean(pull(df_one, factor_vector))
 ```{r Question_one_part_two, val = FALSE}
 ## convert the logical vector to numeric, and multiply the random sample by the result
 as.numeric(pull(df_one, logical_vector))
-product_rs_lv_numeric = pull(df_one, logical_vector) * pull(df_one, ramdom_sample)
+product_rs_lv_numeric = pull(df_one, logical_vector) * 
+  pull(df_one, ramdom_sample)
 product_rs_lv_numeric
 
-##convert the logical vector to a factor, and multiply the random sample by the result
+## convert the logical vector to a factor, and multiply the random sample by the result
 as.factor(pull(df_one, logical_vector))
-product_rs_lv_factor = pull(df_one, logical_vector) * pull(df_one, ramdom_sample)
+product_rs_lv_factor = pull(df_one, logical_vector) * 
+  pull(df_one, ramdom_sample)
 product_rs_lv_factor
 
-##convert the logical vector to a factor and then convert the result to numeric, and multiply the random sample by the result
+## convert the logical vector to a factor and then convert the result to numeric, and multiply the random sample by the result
 as.factor(pull(df_one, logical_vector))
 as.numeric(pull(df_one, logical_vector))
-product_rs_lv_n_f = pull(df_one, logical_vector) * pull(df_one, ramdom_sample)
+product_rs_lv_n_f = pull(df_one, logical_vector) * 
+  pull(df_one, ramdom_sample)
 product_rs_lv_n_f
 ```
 
@@ -109,7 +112,6 @@ ggplot(df_two, aes(color = logical_factor_two_numeric, x = x, y = y)) +
 ## scatterplot using the factor variable, blue(green) means the sum of x and y exceeds 1
 ggplot(df_two, aes(color = logical_factor_two_factor, x = x, y = y)) + 
   geom_point()
-
 ## Export the first scatterplot to the project directory
 ggsave("df_two.png")
 ```
